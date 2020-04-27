@@ -21,7 +21,7 @@ class SessionController extends Controller
 
         if (Auth::attempt($credentials)) {
             session()->flash('success', '登录成功');
-            return redirect()->route('user.show', [Auth::user()]);
+            return redirect()->route('users.show', [Auth::user()]);
         } else {
             session()->flash('danger', '很抱歉，您的账号密码不匹配');
             return redirect()->back()->withInput();
