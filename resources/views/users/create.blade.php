@@ -8,6 +8,7 @@
       </div>
       <div class="card-body">
         <form method="POST" action="{{ route('users.store') }}">
+          {{csrf_token()}}
           <div class="form-group">
             <label for="name">名称：</label>
             <input type="text" name="name" class="form-control" value="{{ old('name') }}">
@@ -25,7 +26,8 @@
 
           <div class="form-group">
             <label for="password_confirmation">确认密码：</label>
-            <input type="password" name="password_confirmation" class="form-control" value="{{ old('password_confirmation') }}">
+            <input type="password" name="password_confirmation" class="form-control"
+                   value="{{ old('password_confirmation') }}">
           </div>
 
           <button type="submit" class="btn btn-primary">注册</button>
@@ -33,4 +35,4 @@
       </div>
     </div>
   </div>
-  @stop
+@stop
