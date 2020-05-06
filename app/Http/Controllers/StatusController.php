@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Status;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,11 +17,11 @@ class StatusController extends Controller
     public function home()
     {
         $feed_items = [];
-        if(Auth::check()){
+        if (Auth::check()) {
             $feed_items = Auth::user()->feed()->paginate(30);
         }
 
-        return view('static_pages/home',compact('feed_items'));
+        return view('static_pages/home', compact('feed_items'));
     }
 
     public function store(Request $request)
@@ -33,6 +34,14 @@ class StatusController extends Controller
             'content' => $request['content']
         ]);
         session()->flash('success', '发布成功');
+        return redirect()->back();
+    }
+
+    public function destroy(Status $status)
+    {
+        $this->authorize('destroy', $status);
+        $status->delete();
+        session()->flash('success', '微博已被成功删除');
         return redirect()->back();
     }
 }
