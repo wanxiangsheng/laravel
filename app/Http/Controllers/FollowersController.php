@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class FollowersController extends Controller
@@ -10,7 +11,7 @@ class FollowersController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function store(User $user)
     {
         $this->authorize('follow', $user);
